@@ -122,9 +122,15 @@ uses
   WsNotas in 'source\WsNotas.pas' {TFrmWsNotas},
   Coman in 'source\Coman.pas' {TFrmGereComanda},
   Menu in 'source\Menu.pas' {frmPrincipal},
-  Splash in 'source\Splash.pas' {FrmSplash};
+  Splash in 'source\Splash.pas' {FrmSplash},
+  AdjustGrid in 'source\AdjustGrid.pas',
+  funcoes in 'source\funcoes.pas',
+  vGlobal in 'source\vGlobal.pas';
 
 {$R *.RES}
+
+ var
+  xContinua : boolean;
 
 begin
   Application.Initialize;
@@ -136,5 +142,15 @@ begin
   Application.CreateForm(TTMP, TMP);
   Application.CreateForm(TQe, Qe);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
-  Application.Run;
+
+  xContinua := True;
+
+  if not VerificaLogin then
+    begin
+      xContinua := false;
+      Application.Terminate;
+    end;
+
+  if xContinua then
+    Application.Run;
 end.

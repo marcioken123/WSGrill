@@ -361,11 +361,11 @@ type
     TbUsuariosIDENTIFICACAO: TIBStringField;
     TbUsuariosSENHA: TIBStringField;
     TbUsuariosFILIAL: TIBStringField;
-    TbUsuariosHORAINICIAL: TIBStringField;
-    TbUsuariosHORAFINAL: TIBStringField;
+    TbUsuariosHORAINICIAL: TDateTimeField;
+    TbUsuariosHORAFINAL: TDateTimeField;
     TbUsuariosFILIALOUTODAS: TIBStringField;
     TbUsuariosDIRBACKUP: TIBStringField;
-    TbUsuariosATUALIZACAO: TIBStringField;
+    TbUsuariosATUALIZACAO: TDateTimeField;
     TbUsuariosFILTROLCTOS: TIBStringField;
     TbUsuariosACESSO: TIBStringField;
     TbUsuariosACESSO2: TIBStringField;
@@ -373,7 +373,7 @@ type
     TbUsuariosNDIASFILTRO: TIntegerField;
     TbUsuariosALERTAESTMIN: TIBStringField;
     TbUsuariosACESSOCUSTO: TIBStringField;
-    TbUsuariosVERIFICAPROMO: TIntegerField;
+    TbUsuariosVERIFICAPROMO: TStringField;
     TbUsuariosCONECTADO: TIBStringField;
     TbUsuariosDECIMAISCALCU: TIntegerField;
     TbUsuariosGRIDCALCU: TIBStringField;
