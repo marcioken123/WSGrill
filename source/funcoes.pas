@@ -154,26 +154,44 @@ end;
 
 procedure AbreCadastros;
 begin
+  // 1. Parâmetros e Configuração Inicial de Filial
+  AbreTabela(Dm2.TbParmFili, False);
+  gFilialCorrente := Dm2.TbParmFiliFilial.AsString;
 
-  AbreTabela(Dm2.TbParmFili, false);
+  // Configuração dos Filtros por Filial
+  Dm1.TbClieFili.Filter   := 'Filial = ' + Aspas(gFilialCorrente);
+  Dm1.TbFiliais.Filter    := 'Filial = ' + Aspas(gFilialCorrente);
+  Dm1.TbClieFili.Filtered := True;
+  Dm1.TbFiliais.Filtered  := True;
 
-  gFilialCorrente := dm2.TbParmFiliFilial.AsString;
+  // 2. Usuários e Permissões
+  AbreTabela(Dm2.TbUsuarios, False);
+  Dm2.TbUsuarios.Locate('Usuario', gUsuario, [loCaseInsensitive]);
 
-  dm1.TbClieFili.Filter   := 'Filial = '+Aspas(gFilialCorrente);
-  dm1.TbFiliais.Filter    := 'Filial = '+Aspas(gFilialCorrente);
+  // 3. Cadastros Principais (Dm1)
+  AbreTabela(Dm1.TbClientes, False);
+  AbreTabela(Dm1.TbClieFili, False);
+  AbreTabela(Dm1.TbFunc, False);
+  AbreTabela(Dm1.TbFiliais, False);
 
-  dm1.TbClieFili.Filtered := True;
-  dm1.TbFiliais.Filtered  := True;
+  // 4. Outras Tabelas de Cadastro do Dm1 / Dm2 (Anteriores que estavam comentadas ou desativadas)
+  if Assigned(Dm1.FindComponent('TbRegistro')) then
+    AbreTabela(TIBDataSet(Dm1.FindComponent('TbRegistro')), False);
 
-  AbreTabela(Dm2.TbUsuarios, false);
-  dm2.TbUsuarios.Locate('Usuario', gUsuario, [loCaseInsensitive]);
+  if Assigned(Dm1.FindComponent('TbSuporte')) then
+    AbreTabela(TIBDataSet(Dm1.FindComponent('TbSuporte')), False);
 
-  AbreTabela(Dm1.TbClientes, false);
-  AbreTabela(Dm1.TbClieFili, false);
-  //AbreTabela(Dm.TbRegistro, false);
-  AbreTabela(Dm1.TbFunc, false);
-  //AbreTabela(Dm.TbSuporte, false);
-  AbreTabela(Dm1.TbFiliais, false);
+  if Assigned(Dm2.FindComponent('TbFornecedores')) then
+    AbreTabela(TIBDataSet(Dm2.FindComponent('TbFornecedores')), False);
+
+  if Assigned(Dm2.FindComponent('TbProdutos')) then
+    AbreTabela(TIBDataSet(Dm2.FindComponent('TbProdutos')), False);
+
+  if Assigned(Dm2.FindComponent('TbVendedores')) then
+    AbreTabela(TIBDataSet(Dm2.FindComponent('TbVendedores')), False);
+
+  if Assigned(Dm2.FindComponent('TbTransportadoras')) then
+    AbreTabela(TIBDataSet(Dm2.FindComponent('TbTransportadoras')), False);
 end;
 
 function Adiciona(xTabela : TIBDataSet) : Boolean;

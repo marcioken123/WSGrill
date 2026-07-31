@@ -68,31 +68,36 @@ var
 
 implementation
 
+uses
+  udm1,
+  funcoes;
+
 {$R *.DFM}
 
 procedure TfrmMesas.FormShow(Sender: TObject);
 begin
-  if Assigned(dsMesas.DataSet) and not dsMesas.DataSet.Active then
-    dsMesas.DataSet.Open;
+  if Assigned(Dm1.dsMesas.DataSet) and not Dm1.dsMesas.DataSet.Active then
+    Dm1.dsMesas.DataSet.Open;
+  AbreTabela(dm1.TbMesaFunc, False);
 end;
 
 procedure TfrmMesas.sbAdicionaClick(Sender: TObject);
 begin
-  if Assigned(dsMesas.DataSet) then
+  if Assigned(Dm1.dsMesas.DataSet) then
   begin
-    dsMesas.DataSet.Append;
+    Dm1.dsMesas.DataSet.Append;
     
     // Set default initial values for new records
-    if dsMesas.DataSet.FindField('STATUS') <> nil then
-      dsMesas.DataSet.FieldByName('STATUS').AsString := 'D'; // Disponível
-    if dsMesas.DataSet.FindField('ATEND_DIA') <> nil then
-      dsMesas.DataSet.FieldByName('ATEND_DIA').AsInteger := 0;
-    if dsMesas.DataSet.FindField('ATEND_MES') <> nil then
-      dsMesas.DataSet.FieldByName('ATEND_MES').AsInteger := 0;
-    if dsMesas.DataSet.FindField('VLR_ACUM_DIA') <> nil then
-      dsMesas.DataSet.FieldByName('VLR_ACUM_DIA').AsFloat := 0.0;
-    if dsMesas.DataSet.FindField('VLR_ACUM_MES') <> nil then
-      dsMesas.DataSet.FieldByName('VLR_ACUM_MES').AsFloat := 0.0;
+    if Dm1.dsMesas.DataSet.FindField('STATUS') <> nil then
+      Dm1.dsMesas.DataSet.FieldByName('STATUS').AsString := 'D'; // Disponível
+    if Dm1.dsMesas.DataSet.FindField('ATEND_DIA') <> nil then
+      Dm1.dsMesas.DataSet.FieldByName('ATEND_DIA').AsInteger := 0;
+    if Dm1.dsMesas.DataSet.FindField('ATEND_MES') <> nil then
+      Dm1.dsMesas.DataSet.FieldByName('ATEND_MES').AsInteger := 0;
+    if Dm1.dsMesas.DataSet.FindField('VLR_ACUM_DIA') <> nil then
+      Dm1.dsMesas.DataSet.FieldByName('VLR_ACUM_DIA').AsFloat := 0.0;
+    if Dm1.dsMesas.DataSet.FindField('VLR_ACUM_MES') <> nil then
+      Dm1.dsMesas.DataSet.FieldByName('VLR_ACUM_MES').AsFloat := 0.0;
 
     if edCodMesa.CanFocus then
       edCodMesa.SetFocus;
@@ -101,23 +106,23 @@ end;
 
 procedure TfrmMesas.sbGravaClick(Sender: TObject);
 begin
-  if Assigned(dsMesas.DataSet) and (dsMesas.DataSet.State in [dsInsert, dsEdit]) then
-    dsMesas.DataSet.Post;
+  if Assigned(Dm1.dsMesas.DataSet) and (Dm1.dsMesas.DataSet.State in [dsInsert, dsEdit]) then
+    Dm1.dsMesas.DataSet.Post;
 end;
 
 procedure TfrmMesas.sbApagaClick(Sender: TObject);
 begin
-  if Assigned(dsMesas.DataSet) and not dsMesas.DataSet.IsEmpty then
+  if Assigned(Dm1.dsMesas.DataSet) and not Dm1.dsMesas.DataSet.IsEmpty then
   begin
     if MessageDlg('Deseja realmente apagar esta mesa?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-      dsMesas.DataSet.Delete;
+      Dm1.dsMesas.DataSet.Delete;
   end;
 end;
 
 procedure TfrmMesas.sbDesfazClick(Sender: TObject);
 begin
-  if Assigned(dsMesas.DataSet) and (dsMesas.DataSet.State in [dsInsert, dsEdit]) then
-    dsMesas.DataSet.Cancel;
+  if Assigned(Dm1.dsMesas.DataSet) and (Dm1.dsMesas.DataSet.State in [dsInsert, dsEdit]) then
+    Dm1.dsMesas.DataSet.Cancel;
 end;
 
 procedure TfrmMesas.sbFechaClick(Sender: TObject);
@@ -131,18 +136,18 @@ var
 begin
   // Example lookup logic for searching tables
   CodMesa := edCodMesa.Text;
-  if (CodMesa <> '') and Assigned(dsMesas.DataSet) then
+  if (CodMesa <> '') and Assigned(Dm1.dsMesas.DataSet) then
   begin
-    dsMesas.DataSet.Locate('CODMESA', CodMesa, [loCaseInsensitive]);
+    Dm1.dsMesas.DataSet.Locate('CODMESA', CodMesa, [loCaseInsensitive]);
   end;
 end;
 
 procedure TfrmMesas.sbTodosClick(Sender: TObject);
 begin
-  if Assigned(dsMesas.DataSet) then
+  if Assigned(Dm1.dsMesas.DataSet) then
   begin
-    dsMesas.DataSet.Filtered := False;
-    dsMesas.DataSet.First;
+    Dm1.dsMesas.DataSet.Filtered := False;
+    Dm1.dsMesas.DataSet.First;
   end;
 end;
 

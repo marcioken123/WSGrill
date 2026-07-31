@@ -226,7 +226,7 @@ begin
     end;
 
     // Extrai o nome da tabela principal da instrução Select do IBDataSet
-    xTabelaG := StringReplace(tDataSet.SelectSQL[0], 'SELECT * FROM ', EmptyStr, []);
+    xTabelaG := StringReplace(UpperCase(tDataSet.SelectSQL[0]), 'SELECT * FROM ', EmptyStr, []);
     if xTabelaG = '' then
       xTabelaG := tDataSet.Name;
 
