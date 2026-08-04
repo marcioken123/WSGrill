@@ -154,5 +154,7 @@ begin
     end;
 
   if xContinua then
-    Application.Run;
+    Application.Run
+  else
+    Application.Terminate;
 end.

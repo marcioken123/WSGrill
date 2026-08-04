@@ -77,6 +77,10 @@ procedure TfrmGrupos.FormShow(Sender: TObject);
 begin
   AbreTabela(Dm1.TbGrupos, False);
   AbreTabela(dm1.TbUnidMED, False);
+  AbreTabela(dm1.TbImprGrill, False);
+  AbreTabela(dm2.TbClasFisc, False);
+  AbreTabela(dm2.TbClasFisc, False);
+  AbreTabela(dm1.TbSitTrib, False);
 end;
 
 procedure TfrmGrupos.FormClose(Sender: TObject; var Action: TCloseAction);

@@ -86,6 +86,7 @@ type
     procedure edCodFuncExit(Sender: TObject);
     procedure EdComandaButtonClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     procedure CarregaDetalhesComanda;
     procedure LimparCamposItem;
@@ -101,6 +102,7 @@ var
 implementation
 
 uses
+  funcoes,
   UDm1,
   F2Geral,
   Fecham; // Unit da tela de fechamento de pagamento TfrmFecha
@@ -477,6 +479,14 @@ begin
   // Destaca itens estornados/cancelados na grid
   // if dbgMesaItem.DataSource.DataSet.FieldByName('STATUS').AsString = 'C' then
   //   AFont.Color := clRed;
+end;
+
+procedure TFrmGereComanda.FormShow(Sender: TObject);
+begin
+  AbreTabela(dm1.TbMesas, False);
+  AbreTabela(dm1.TbMesaLcto, False);
+  AbreTabela(dm1.TbMesaItem, False);
+  AbreTabela(dm1.TbFunc, False);
 end;
 
 end.

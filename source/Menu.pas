@@ -77,6 +77,12 @@ type
     procedure Impressorar1Click(Sender: TObject);
     procedure LeituraX1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure ProgramaodeAlquotas1Click(Sender: TObject);
+    procedure ConfBancodeDados1Click(Sender: TObject);
+    procedure Sangria1Click(Sender: TObject);
+    procedure HorriodeVero1Click(Sender: TObject);
+    procedure ArredondamentoTruncamento1Click(Sender: TObject);
+    procedure rocadeUsurio1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -102,7 +108,8 @@ uses
   fontes,
   Impress,
   LeituraX,
-  funcoes;
+  funcoes,
+  aliq, Conecta, sangsup, horverao, Arredo;
 
 {$R *.DFM}
 
@@ -244,6 +251,46 @@ end;
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
   AbreCadastros;
+end;
+
+procedure TfrmPrincipal.ProgramaodeAlquotas1Click(Sender: TObject);
+begin
+  FrmAliquotas := TFrmAliquotas.Create(Self);
+  FrmAliquotas.ShowModal;
+  FrmAliquotas.Free;
+end;
+
+procedure TfrmPrincipal.ConfBancodeDados1Click(Sender: TObject);
+begin
+  frmConecta := TfrmConecta.Create(Self);
+  frmConecta.ShowModal;
+  frmConecta.Free;
+end;
+
+procedure TfrmPrincipal.Sangria1Click(Sender: TObject);
+begin
+  FrmSangSupr := TFrmSangSupr.Create(Self);
+  FrmSangSupr.ShowModal;
+  FrmSangSupr.Free;
+end;
+
+procedure TfrmPrincipal.HorriodeVero1Click(Sender: TObject);
+begin
+  FrmHorarioVerao := TFrmHorarioVerao.Create(Self);
+  FrmHorarioVerao.ShowModal;
+  FrmHorarioVerao.Free;
+end;
+
+procedure TfrmPrincipal.ArredondamentoTruncamento1Click(Sender: TObject);
+begin
+  FrmArredondaTrunca := TFrmArredondaTrunca.Create(Self);
+  FrmArredondaTrunca.ShowModal;
+  FrmArredondaTrunca.Free;
+end;
+
+procedure TfrmPrincipal.rocadeUsurio1Click(Sender: TObject);
+begin
+  VerificaLogin;
 end;
 
 end.
